@@ -4,47 +4,41 @@
  * @return {object}
  */
 function makeCalculator() {
-  return {
-   
+const calculator = {
     result: 0,
 
-   
-    add(value) {
-      this.result += value;
-    },
+    operate(callback, number) {
+      const operateFunc = callback.bind(this, number);
 
-   
-    subtract(value) {
-      this.result -= value;
-    },
+      operateFunc();
 
-   
-    multiply(value) {
-      this.result *= value;
-    },
-
-   
-    divide(value) {
-      if (value !== 0) {
-        this.result /= value;
-      } else {
-        // eslint-disable-next-line no-console
-        console.error('Cannot divide by zero');
-      }
-    },
-
-   
-    operate(operation, value) {
-      operation.call(this, value); 
-      return this; 
+      return this;
     },
 
     reset() {
       this.result = 0;
 
-      return this; 
+      return this;
+    },
+
+    add(number) {
+      this.result += number;
+    },
+
+    subtract(number) {
+      this.result -= number;
+    },
+
+    multiply(number) {
+      this.result *= number;
+    },
+
+    divide(number) {
+      this.result /= number;
     },
   };
+
+  return calculator;
 }
 
 module.exports = makeCalculator;
